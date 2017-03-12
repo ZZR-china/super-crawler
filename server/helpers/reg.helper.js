@@ -1,5 +1,5 @@
 /**
- * Module description: 时间处理模块
+ * Module description: reg正则处理模块
  */
 const moment = require('moment');
 const localTime = require('moment-timezone');

@@ -221,19 +221,24 @@ const start = async function(req, res, next) {
         const length = archive_bricks.length;
         
         const query = req.query;
-        const start = (Number(query.start) -1) || 0;
-        const end = (Number(query.end) -1) || length;
-
-        console.log("start", start);
-        console.log("end", end);
-
-        for (let i = start; i < end; i++) {
-            manageBricks(archive_bricks.eq(i));
+        let start = (Number(query.start) -1);
+        start = start ? (start < 0 ? 0 : start) : 0 ;
+        let end = (Number(query.end) -1);
+        end = (end === 0) ? 1 : ( end ? (end < 0 ? 1 : end) : length);
+        const zzr = query.zzr || null;
+        const meizi_key = process.env.MEIZI_KEY || "1995"
+        if (zzr === meizi_key) {
+            for (let i = start; i < end; i++) {
+                manageBricks(archive_bricks.eq(i));
+            }
+            return res.send("spider is start")
+        }else {
+            return res.send("haha, you miss some thing")
         }
 
-        next()
     } catch (err) {
         console.error(err);
+        return next(err)
     }
 }
 

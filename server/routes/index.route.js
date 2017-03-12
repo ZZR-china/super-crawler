@@ -2,6 +2,7 @@ import express from 'express';
 import userRoutes from './user.route';
 import qrRoutes from './qr.route';
 import captchaRoutes from './captcha.route';
+import meiziRoutes from './meizi.route';
 import spiderRoutes from './spider.route';
 
 const router = express.Router();
@@ -13,7 +14,7 @@ router.get('/', function(req, res, next) {
 router.use('/users', userRoutes);
 router.use('/qr', qrRoutes);
 router.use('/captcha', captchaRoutes);
-
+router.use('/meizi', meiziRoutes);
 router.use('/spiders', spiderRoutes);
 
 export default router;

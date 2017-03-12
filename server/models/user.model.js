@@ -15,17 +15,15 @@ const oAuthTypes = [
 /**
  * User Schema
  */
-
 const UserSchema = new Schema({
     name: { type: String, default: '' },
     email: { type: String, default: '' },
-    username: { type: String, default: '' },
+    username: { type: String, default: '', uniq: true},
     provider: { type: String, default: '' },
     hashed_password: { type: String, default: '' },
     salt: { type: String, default: '' },
     authToken: { type: String, default: '' },
-    github: {},
-    google: {}
+    github: {}
 });
 
 const validatePresenceOf = value => value && value.length;
