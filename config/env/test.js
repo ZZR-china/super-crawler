@@ -1,6 +1,7 @@
 export default {
-  env: 'test',
-  jwtSecret: '0a6b944d-d2fb-46fc-a85e-0295c986cd9f',
-  db: 'mongodb://localhost/express-mongoose-es6-rest-api-test',
-  port: 3000
+	env: 'test',
+	meiziKey: "1995",
+	jwtSecret: '0a6b944d-d2db-46fc-a85e-0295c986cd1f',
+	db: 'mongodb://127.0.0.1:27017/wormtest',
+	port: 3000
 };

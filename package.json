@@ -11,7 +11,8 @@
     },
     "scripts": {
         "start": "node dist/server.js",
-        "dev": "gulp serve",
+        "dev": "cross-env NODE_ENV=development gulp serve",
+        "test": "cross-env NODE_ENV=test gulp serve",
         "build": "gulp"
     },
     "keywords": [

@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const genera_Schema = new Schema({
     name: {
     	type: String,
-    	uniq:true
+    	unique:true
     },
     hot: Number, //热度
     description: String, //描述

@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const meizi_Schema = new Schema({
     title: {
         type: String,
-        uniq: true
+        unique: true
     },
     description: String, //描述
     hotest_pic_id: Schema.Types.ObjectId, //浏览量最高的图片id

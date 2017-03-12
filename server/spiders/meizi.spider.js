@@ -24,7 +24,7 @@ import config from '../../config/env/';
  */
 function manageBricks(brick) {
     let href = brick.find('a').attr('href');
-    console.log("href", href)
+    // console.log("href", href)
     return setPics(href, 1);
 }
 
@@ -75,7 +75,7 @@ async function setPics(href, count) {
         let title, url, alt, meizihref = href, originhref, homesite;
         let picview, order, formate_time, timestamp;
         
-        let genera, category = [], categories;
+        let genera, categories;
 
         article = $("#content article").eq(0);
         title = article.find('h2').text(); //pic title
@@ -113,19 +113,17 @@ async function setPics(href, count) {
         categories = $(".post-meta ul li a");
         for (let i = 0, len = categories.length; i < len; i++) {
             //check and save category
-            let cate = categories.eq(i).text();
-            let category_doc, 
-                category_query = { name:  cate},
-                category_data = { name: cate};
-            category_doc = await uniquSave(category_query, category_data, Category);
+            let cate = categories.eq(i).text().trim();
+            let category_doc,
+                category_query = { name: cate}
 
+            category_doc = await uniquSave(category_query, category_query, Category);
             let category_id = category_doc._id;
             let pic_category_doc,
                 pic_category_query = { pic_id: pic_id, category_id: category_id},
                 pic_category_data = { pic_id: pic_id, category_id: category_id};
             pic_category_doc = await uniquSave(pic_category_query, pic_category_data, PicCategory);
 
-            await category.push(cate);
         }
     
         console.log("=============== start ================")
@@ -135,10 +133,9 @@ async function setPics(href, count) {
         // console.log("pic originhref", originhref);
         // console.log("pic homesite", homesite);
         // console.log("pic picview", picview);
-        console.log("pic formate_time", formate_time);
+        // console.log("pic formate_time", formate_time);
         // console.log("pic timestamp", timestamp);
         // console.log("pic genera", genera);
-        // console.log("pic category", category);
         // console.log("pic pagecount", pagecount);
         console.log("=============== end ================")
 
@@ -201,7 +198,6 @@ async function setPics(href, count) {
             let genera_id = genera_doc._id;
 
             await Genera.update({_id: genera_id}, {$addToSet: {"meizi_ids": meizi._id}});
-            // console.log("meizi", meizi)
             console.log("meizi done")
             return 
         }

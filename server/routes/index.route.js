@@ -4,6 +4,7 @@ import qrRoutes from './qr.route';
 import captchaRoutes from './captcha.route';
 import meiziRoutes from './meizi.route';
 import spiderRoutes from './spider.route';
+import categoriesRoutes from './category.route';
 
 const router = express.Router();
 
@@ -15,6 +16,7 @@ router.use('/users', userRoutes);
 router.use('/qr', qrRoutes);
 router.use('/captcha', captchaRoutes);
 router.use('/meizi', meiziRoutes);
+router.use('/categories', categoriesRoutes);
 router.use('/spiders', spiderRoutes);
 
 export default router;

@@ -10,7 +10,24 @@ import Genera from '../models/genera.model';
 import PicCategory from '../models/pic_category.model';
 
 function index(req, res, next) {
-
+    let query = req.query, 
+        fliter, 
+        skip = Number(query.skip) || 0,
+        limit = Number(query.limit) || 50
+    query = query.name ? { name: query.name } : {}
+    Category.list({ query, fliter, skip, limit})
+        .then(result => {
+            if (result.length === 0) {
+                let err = new APIError('not found', httpStatus.NOT_FOUND);
+                return next(err);
+            }
+            return res.json(result)
+        })
+        .catch(err => {
+            console.error(err)
+            err = new APIError(err.message, httpStatus.NOT_FOUND, true);
+            return next(err);
+        })
 }
 
 function create(req, res, next) {
@@ -31,18 +48,14 @@ function destroy(req, res, next) {
 
 async function random(req, res, next) {
     try {
-        let genera = await Genera.$where('this.meizi_ids.length > 0')
-        genera = await genera.map(function (item) {
-            return item.name
-        })
+        const genera = ['性感', '台湾', '清纯', '日本']
         const query = req.query
         let type = query.type
         if (!type) {
             const num = _random.getRandom(genera.length)
             type = genera[num]
-        }else{
-            type = type + '妹子'
         }
+        type = type + '妹子'
         const generaDoc = await Genera.findOne({name: type})
         const meiziIds = generaDoc.meizi_ids;
         const meiziId = _random.getRandomFromArr(meiziIds, 1)[0]
