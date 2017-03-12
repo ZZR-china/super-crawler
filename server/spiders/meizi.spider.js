@@ -14,6 +14,8 @@ import PicCategory from '../models/pic_category.model';
 import APIError from '../helpers/apierror.helper';
 import _time from '../helpers/time.helper';
 
+import config from '../../config/env/';
+
 /**
  * [manageBricks 处理获得的$('#post-archives .archive-brick').eq(n)
  * 得到其中的网址并解析]
@@ -226,7 +228,8 @@ const start = async function(req, res, next) {
         let end = (Number(query.end) -1);
         end = (end === 0) ? 1 : ( end ? (end < 0 ? 1 : end) : length);
         const zzr = query.zzr || null;
-        const meizi_key = process.env.MEIZI_KEY || "1995"
+        console.log("config.meiziKey", config.meiziKey)
+        const meizi_key = config.meiziKey
         if (zzr === meizi_key) {
             for (let i = start; i < end; i++) {
                 manageBricks(archive_bricks.eq(i));
