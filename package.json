@@ -10,7 +10,7 @@
         "type": "git"
     },
     "scripts": {
-        "start": "gulp serve",
+        "start": "node dist/server.js",
         "dev": "gulp serve",
         "build": "gulp"
     },

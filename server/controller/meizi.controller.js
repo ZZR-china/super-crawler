@@ -46,7 +46,7 @@ async function random(req, res, next) {
         const picIds = meiziDoc.pic_ids;
         const picId = _random.getRandomFromArr(picIds, 1)[0]
         const picDoc = await Pic.findOne({_id: picId})
-        return res.send(picDoc)
+        return res.json(picDoc)
     }catch(err) {
         console.error(err)
         err = new APIError(err.message, httpStatus.NOT_FOUND, true);
