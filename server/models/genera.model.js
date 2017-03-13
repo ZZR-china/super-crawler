@@ -10,9 +10,10 @@ const genera_Schema = new Schema({
     },
     hot: Number, //热度
     description: String, //描述
-    meizi_ids: [Schema.Types.ObjectId], //meizi网集合
     CreateAt: { type: Number, default: new Date().getTime() }
 });
+
+genera_Schema.index({ name: 1}, {unique:true, background:true, w:1})
 
 genera_Schema.statics = {
 

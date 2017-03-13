@@ -12,6 +12,8 @@ const category_Schema = new Schema({
     CreateAt: { type: Number, default: new Date().getTime() }
 });
 
+category_Schema.index({ name: 1}, {unique:true, background:true, w:1})
+
 category_Schema.statics = {
 	/**
 	 * List users in descending order of 'createdAt' timestamp.

@@ -1,18 +1,21 @@
 /*
- * Module description: meizi.com pictrue
+ * Module description: album pictrue
  */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const meizi_Schema = new Schema({
+const album_Schema = new Schema({
     title: {
         type: String,
         unique: true
     },
+    homesite: {
+        url: String, //主站网址
+        name: String, //主站网址名字 妹子图等
+    },
     description: String, //描述
     hotest_pic_id: Schema.Types.ObjectId, //浏览量最高的图片id
     hotest_pic_url: String, //浏览量最高的图片地址
-    pic_ids: [Schema.Types.ObjectId], //图片
-    picview: Number, //浏览量
+    view: Number, //浏览量
     max_picview: Number, //单张pic最高浏览量
     formate_time: {
         year: Number,
@@ -24,7 +27,9 @@ const meizi_Schema = new Schema({
     CreateAt: { type: Number, default: new Date().getTime() }
 });
 
-meizi_Schema.statics = {
+album_Schema.index({ title: 1}, {unique:true, background:true, w:1})
+
+album_Schema.statics = {
     get(data) {
         return this.findOne(data)
             .then(result => {
@@ -48,7 +53,20 @@ meizi_Schema.statics = {
             .catch(err => {
                 return Promise.reject(err);
             })
+    },
+
+    /**
+     * List users in descending order of 'createdAt' timestamp.
+     * @param {number} skip - Number of users to be skipped.
+     * @param {number} limit - Limit number of users to be returned.
+     * @returns {Promise<User[]>}
+     */
+    list({ query = {}, fliter = null, skip = 0, limit = 50 } = {}) {
+        return this.find(query, fliter)
+            .sort({ timestamp: -1 })
+            .skip(skip)
+            .limit(limit)
     }
 }
 
-export default mongoose.model('meizi', meizi_Schema, 'meizi');
+export default mongoose.model('album', album_Schema, 'album');

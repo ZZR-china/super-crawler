@@ -8,10 +8,9 @@ const pic_Schema = new Schema({
     description: String, //描述
     url: String, //图片地址
     alt: String, //alt标签
-    meizihref: String, //妹子网的合集 主网址
-    originhref: String, //来源网址 及解析的网址
+    origin_url: String, //来源网址 即解析的网址
     homesite: {
-        href: String, //主站网址
+        url: String, //主站网址
         name: String, //主站网址名字 妹子图等
     },
     picview: Number, //浏览量

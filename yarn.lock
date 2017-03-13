@@ -884,6 +884,10 @@ bluebird:
   version "3.4.7"
   resolved "http://registry.npm.taobao.org/bluebird/download/bluebird-3.4.7.tgz#f72d760be09b7f76d08ed8fae98b289a8d05fab3"
 
+bluebird@^2.9.34:
+  version "2.11.0"
+  resolved "http://registry.npm.taobao.org/bluebird/download/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
+
 bluebird@2.10.2:
   version "2.10.2"
   resolved "http://registry.npm.taobao.org/bluebird/download/bluebird-2.10.2.tgz#024a5517295308857f14f91f1106fc3b555f446b"
@@ -912,6 +916,10 @@ boom@2.x.x:
   resolved "http://registry.npm.taobao.org/boom/download/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
   dependencies:
     hoek "2.x.x"
+
+bottleneckp@~1.1.0:
+  version "1.1.2"
+  resolved "http://registry.npm.taobao.org/bottleneckp/download/bottleneckp-1.1.2.tgz#55b4dee6f73e2ec75c0d7e8c1a285098b6ee4a58"
 
 brace-expansion@^1.0.0:
   version "1.1.6"
@@ -992,7 +1000,11 @@ chalk@~0.4.0:
     has-color "~0.1.0"
     strip-ansi "~0.1.0"
 
-cheerio:
+charset-parser@^0.2.0:
+  version "0.2.0"
+  resolved "http://registry.npm.taobao.org/charset-parser/download/charset-parser-0.2.0.tgz#230901088f5f6cb1659a8b5aaad2572db7a75b6b"
+
+cheerio, cheerio@^0.22.0:
   version "0.22.0"
   resolved "http://registry.npm.taobao.org/cheerio/download/cheerio-0.22.0.tgz#a9baa860a3f9b595a6b81b1a86873121ed3a269e"
   dependencies:
@@ -1191,6 +1203,19 @@ cors:
   resolved "http://registry.npm.taobao.org/cors/download/cors-2.8.1.tgz#6181aa56abb45a2825be3304703747ae4e9d2383"
   dependencies:
     vary "^1"
+
+crawler:
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/crawler/download/crawler-1.0.3.tgz#a923a752d68097f2727a28e1352c44c05941cc60"
+  dependencies:
+    bottleneckp "~1.1.0"
+    charset-parser "^0.2.0"
+    cheerio "^0.22.0"
+    iconv-lite "^0.4.8"
+    lodash "^4.17.4"
+    request "~2.79.0"
+    seenreq "^0.1.7"
+    type-is "^1.6.14"
 
 cross-env:
   version "3.1.4"
@@ -1397,6 +1422,10 @@ domutils@^1.5.1, domutils@1.5.1:
 dont-sniff-mimetype@1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/dont-sniff-mimetype/download/dont-sniff-mimetype-1.0.0.tgz#5932890dc9f4e2f19e5eb02a20026e5e5efc8f58"
+
+double-ended-queue@^2.1.0-0:
+  version "2.1.0-0"
+  resolved "http://registry.npm.taobao.org/double-ended-queue/download/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
 
 duplexer@~0.1.1:
   version "0.1.1"
@@ -1820,6 +1849,10 @@ flat-cache@^1.2.1:
     del "^2.0.2"
     graceful-fs "^4.1.2"
     write "^0.2.1"
+
+flexbuffer@0.0.6:
+  version "0.0.6"
+  resolved "http://registry.npm.taobao.org/flexbuffer/download/flexbuffer-0.0.6.tgz#039fdf23f8823e440c38f3277e6fef1174215b30"
 
 follow-redirects@1.0.0:
   version "1.0.0"
@@ -2322,7 +2355,7 @@ http-status:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/http-status/download/http-status-1.0.1.tgz#dc43001a8bfc50ac87d485a892f7578964bc94a2"
 
-iconv-lite@0.4.15:
+iconv-lite@^0.4.13, iconv-lite@^0.4.8, iconv-lite@0.4.15:
   version "0.4.15"
   resolved "http://registry.npm.taobao.org/iconv-lite/download/iconv-lite-0.4.15.tgz#fe265a218ac6a57cfe854927e9d04c19825eddeb"
 
@@ -2392,6 +2425,16 @@ invariant@^2.2.0:
   resolved "http://registry.npm.taobao.org/invariant/download/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
     loose-envify "^1.0.0"
+
+ioredis@^1.8.0:
+  version "1.15.1"
+  resolved "http://registry.npm.taobao.org/ioredis/download/ioredis-1.15.1.tgz#525255cccd557bdd38a0ed3466199f59eb0b9d1c"
+  dependencies:
+    bluebird "^2.9.34"
+    debug "^2.2.0"
+    double-ended-queue "^2.1.0-0"
+    flexbuffer "0.0.6"
+    lodash "^3.6.0"
 
 ipaddr.js@1.2.0:
   version "1.2.0"
@@ -2718,7 +2761,7 @@ liftoff@^2.1.0:
     rechoir "^0.6.2"
     resolve "^1.1.7"
 
-lodash, lodash@^4.0.0, lodash@^4.14.0, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.9.0:
+lodash, lodash@^4.0.0, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.9.0:
   version "4.17.4"
   resolved "http://registry.npm.taobao.org/lodash/download/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -2914,6 +2957,10 @@ lodash.templatesettings@^3.0.0:
   dependencies:
     lodash._reinterpolate "^3.0.0"
     lodash.escape "^3.0.0"
+
+lodash@^3.6.0:
+  version "3.10.1"
+  resolved "http://registry.npm.taobao.org/lodash/download/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
 lodash@~1.0.1:
   version "1.0.2"
@@ -3172,6 +3219,10 @@ node-pre-gyp@^0.6.29:
     semver "~5.3.0"
     tar "~2.2.1"
     tar-pack "~3.3.0"
+
+node-url-utils@^0.4.0:
+  version "0.4.0"
+  resolved "http://registry.npm.taobao.org/node-url-utils/download/node-url-utils-0.4.0.tgz#e2a10e7ddaaae051223464cc7b03d21ee95caf15"
 
 nodemon@^1.10.2:
   version "1.11.0"
@@ -3666,7 +3717,7 @@ replace-ext@0.0.1:
   version "0.0.1"
   resolved "http://registry.npm.taobao.org/replace-ext/download/replace-ext-0.0.1.tgz#29bbd92078a739f0bcce2b4ee41e837953522924"
 
-request, request@^2.79.0:
+request, request@^2.79.0, request@~2.79.0:
   version "2.79.0"
   resolved "http://registry.npm.taobao.org/request/download/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
@@ -3761,6 +3812,15 @@ rx-lite@^3.1.2:
 safe-buffer@^5.0.1:
   version "5.0.1"
   resolved "http://registry.npm.taobao.org/safe-buffer/download/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
+
+seenreq@^0.1.7:
+  version "0.1.11"
+  resolved "http://registry.npm.taobao.org/seenreq/download/seenreq-0.1.11.tgz#004b376c69414bed95188f78563ef0a6928289ac"
+  dependencies:
+    node-url-utils "^0.4.0"
+    utils-merge "^1.0.0"
+  optionalDependencies:
+    ioredis "^1.8.0"
 
 semver-diff@^2.0.0:
   version "2.1.0"
@@ -4023,6 +4083,12 @@ superagent:
     qs "^6.1.0"
     readable-stream "^2.0.5"
 
+superagent-charset:
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/superagent-charset/download/superagent-charset-1.1.1.tgz#b5a2c6798945ac7d78c3cc3b6149d9765069cfad"
+  dependencies:
+    iconv-lite "^0.4.13"
+
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/supports-color/download/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
@@ -4153,7 +4219,7 @@ type-detect@0.1.1:
   version "0.1.1"
   resolved "http://registry.npm.taobao.org/type-detect/download/type-detect-0.1.1.tgz#0ba5ec2a885640e470ea4e8505971900dac58822"
 
-type-is@~1.6.14:
+type-is@^1.6.14, type-is@~1.6.14:
   version "1.6.14"
   resolved "http://registry.npm.taobao.org/type-is/download/type-is-1.6.14.tgz#e219639c17ded1ca0789092dd54a03826b817cb2"
   dependencies:
@@ -4214,7 +4280,7 @@ util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/util-deprecate/download/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
-utils-merge@1.0.0:
+utils-merge@^1.0.0, utils-merge@1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/utils-merge/download/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
 

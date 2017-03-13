@@ -4,7 +4,7 @@ import APIError from '../helpers/apierror.helper';
 import _random from '../helpers/random.helper';
 
 import Pic from '../models/pic.model';
-import Meizi from '../models/meizi.model';
+import Album from '../models/album.model';
 import Category from '../models/category.model';
 import Genera from '../models/genera.model';
 import PicCategory from '../models/pic_category.model';

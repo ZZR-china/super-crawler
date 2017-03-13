@@ -5,7 +5,11 @@ const config = require(`./${env}`); // eslint-disable-line import/no-dynamic-req
 
 const defaults = {
   root: path.join(__dirname, '/..'),
-  rootPath: path.join(__dirname, '/../..')
+  rootPath: path.join(__dirname, '/../..'),
+  meizi: {
+  	url: "http://m.mzitu.com",
+  	name: "妹子图"
+  }
 };
 
 export default Object.assign(defaults, config);
