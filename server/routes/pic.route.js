@@ -12,4 +12,7 @@ router.route('/')
 router.route('/random')
       .get(picCtrl.random)
 
+router.route('/latest')
+      .get(picCtrl.latest)
+
 export default router;

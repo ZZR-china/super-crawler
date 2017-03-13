@@ -1,18 +1,22 @@
-## License
+ï»¿## License
 
 MIT
 =======
 # super-crawler
 crawler based on express
 
+docker run -p 27017:27017 -v --name mymongo $PWD/db:/data/db -d mongo
+
 pm2 start ./node_modules/.bin/gulp  --name 'pic' -- start
 
 
 ### meizi api
 
-/meizi/random?type=
+/meizi/random?type=&show=
 
-type : ['ĞÔ¸Ğ', 'Ì¨Íå', 'Çå´¿', 'ÈÕ±¾']
+type : ['æ—¥æœ¬', 'æ¸…çº¯', 'æ€§æ„Ÿ', 'å°æ¹¾']
+
+show : 1 (if show id definded, pictrue will show)
 
 success data: 
 
@@ -20,12 +24,12 @@ success data:
 
 {
 "_id":"58c42acb4cbf4b4e7769f293",
-"title":"°Ù±äÖÆ·şĞã Beautyleg ÃÀÍÈĞ´Õæ No.2014 Vicni£¨15£©",
-"url":"http://i.meizitu.net/2016/02/01v15.jpg", //Í¼Æ¬µØÖ·
-"alt":"°Ù±äÖÆ·şĞã Beautyleg ÃÀÍÈĞ´Õæ No.2014 Vicni", //Í¼Æ¬±êÌâ
+"title":"Â°Ã™Â±Ã¤Ã–Ã†Â·Ã¾ÃÃ£ Beautyleg ÃƒÃ€ÃÃˆÃÂ´Ã•Ã¦ No.2014 VicniÂ£Â¨15Â£Â©",
+"url":"http://i.meizitu.net/2016/02/01v15.jpg", //ÃÂ¼Ã†Â¬ÂµÃ˜Ã–Â·
+"alt":"Â°Ã™Â±Ã¤Ã–Ã†Â·Ã¾ÃÃ£ Beautyleg ÃƒÃ€ÃÃˆÃÂ´Ã•Ã¦ No.2014 Vicni", //ÃÂ¼Ã†Â¬Â±ÃªÃŒÃ¢
 "meizihref":"http://m.mzitu.com/58156",
 "originhref":"http://m.mzitu.com/58156/15",
-"picview":218595, //Í¼Æ¬ä¯ÀÀÁ¿
+"picview":218595, //ÃÂ¼Ã†Â¬Ã¤Â¯Ã€Ã€ÃÂ¿
 "order":15,
 "__v":0,
 "CreateAt":1489243281995,
@@ -38,7 +42,7 @@ success data:
 	"minute":18,
 	"full":"2016-02-01 23:18"
 },
-"homesite":{"href":"http://m.mzitu.com","name":"ÃÃ×ÓÍ¼"}
+"homesite":{"href":"http://m.mzitu.com","name":"ÃƒÃƒÃ—Ã“ÃÂ¼"}
 }
 
 ```
@@ -47,11 +51,13 @@ fail data:
 
 {"message":"Cannot read property 'meizi_ids' of null","request":"/meizi/random?type=asd"}
 
-### pic api
+### pics api
 
-/pic/random?type=
+1. /pics/random?type=
 
-type : ['ĞÔ¸Ğ', 'Ì¨Íå', 'Çå´¿', 'ÈÕ±¾']
+type : ['æ—¥æœ¬', 'æ¸…çº¯', 'æ€§æ„Ÿ', 'å°æ¹¾']
+
+show : 1 (if show id definded, pictrue will show)
 
 success data: 
 
@@ -59,12 +65,12 @@ success data:
 
 {
 "_id":"58c42acb4cbf4b4e7769f293",
-"title":"°Ù±äÖÆ·şĞã Beautyleg ÃÀÍÈĞ´Õæ No.2014 Vicni£¨15£©",
-"url":"http://i.meizitu.net/2016/02/01v15.jpg", //Í¼Æ¬µØÖ·
-"alt":"°Ù±äÖÆ·şĞã Beautyleg ÃÀÍÈĞ´Õæ No.2014 Vicni", //Í¼Æ¬±êÌâ
+"title":"999",
+"url":"http://i.meizitu.net/2016/02/01v15.jpg",
+"alt":"Â°Ã™Â±Ã¤Ã–Ã†Â·Ã¾ÃÃ£ Beautyleg ÃƒÃ€ÃÃˆÃÂ´Ã•Ã¦ No.2014 Vicni",
 "meizihref":"http://m.mzitu.com/58156",
 "originhref":"http://m.mzitu.com/58156/15",
-"picview":218595, //Í¼Æ¬ä¯ÀÀÁ¿
+"picview":218595,
 "order":15,
 "__v":0,
 "CreateAt":1489243281995,
@@ -77,7 +83,7 @@ success data:
 	"minute":18,
 	"full":"2016-02-01 23:18"
 },
-"homesite":{"href":"http://m.mzitu.com","name":"ÃÃ×ÓÍ¼"}
+"homesite":{"href":"http://m.mzitu.com","name":"ÃƒÃƒÃ—Ã“ÃÂ¼"}
 }
 
 ```
@@ -93,6 +99,20 @@ fail data:
 
 success data:
 
-[{"_id":"58c6640b88c2d71748b023a6","name":"FeiLin(àÇàïàï)","__v":0,"CreateAt":1489396737709},{"_id":"58c6640b88c2d71748b023a8","name":"ÍÁ·ÊÔ²°«(ÖÜåûÏ£)","__v":0,"CreateAt":1489396737709},{"_id":"58c6640b88c2d71748b023aa","name":"ĞÔ¸ĞÃÀÅ®","__v":0,"CreateAt":1489396737709},{"_id":"58c6640b88c2d71748b023ac","name":"ÊªÉíÓÕ»ó","__v":0,"CreateAt":1489396737709},{"_id":"58c6640c88c2d71748b023ae","name":"±¬Èé(ĞØÆ÷)","__v":0,"CreateAt":1489396737709}]
+[{"_id":"58c6640b88c2d71748b023a6","name":"FeiLin(Ã Ã‡Ã Ã¯Ã Ã¯)","__v":0,"CreateAt":1489396737709},
+{"_id":"58c6640b88c2d71748b023aa","name":"ÃÃ”Â¸ÃÃƒÃ€Ã…Â®","__v":0,"CreateAt":1489396737709},
+{"_id":"58c6640b88c2d71748b023ac","name":"ÃŠÂªÃ‰Ã­Ã“Ã•Â»Ã³","__v":0,"CreateAt":1489396737709},
+{"_id":"58c6640c88c2d71748b023ae","name":"Â±Â¬ÃˆÃ©(ÃÃ˜Ã†Ã·)","__v":0,"CreateAt":1489396737709}]
 
 ```
+
+2. /pic/latest?show=
+
+show the latest pic
+
+
+### albums api
+/albums/random
+
+/albums/58c6a871a244f0155811f589/pics
+

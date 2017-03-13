@@ -1,4 +1,6 @@
 import httpStatus from 'http-status';
+import axios from 'axios';
+import request from 'request';
 
 import APIError from '../helpers/apierror.helper';
 import _random from '../helpers/random.helper';
@@ -37,9 +39,13 @@ async function random(req, res, next) {
         let picDoc = await randomPic(type)
         if (!picDoc) {
             picDoc = await Pic.findOne()
+        }
+        if (req.query.show) {
+            const url = picDoc.url
+            return request(url).pipe(res)
+        }else {
             return res.json(picDoc)
         }
-        return res.json(picDoc)
     }catch(err) {
         console.error(err)
         err = new APIError(err.message, httpStatus.NOT_FOUND, true);
@@ -73,11 +79,26 @@ async function randomPic (type) {
         const picId = _random.getRandomFromArr(picIds, 1)[0]
         let picDoc = await Pic.findOne({_id: picId})
         return picDoc
-        
     }catch (err) {
         console.error(err)
         err = new APIError(err.message, httpStatus.NOT_FOUND, true);
         return next(err)
+    }
+}
+
+async function latest (req, res, next) {
+    try {
+        const picDoc = await Pic.findOne().sort({timestamp: -1})
+        if (req.query.show) {
+            const url = picDoc.url
+            return request(url).pipe(res)
+        }else {
+            return res.json(picDoc)
+        }
+    } catch (err) {
+        console.error(err)
+        err = new APIError(err.message, httpStatus.NOT_FOUND, true);
+        return next(err);
     }
 }
 
@@ -87,5 +108,6 @@ export default {
     show,
     update,
     destroy,
-    random
+    random,
+    latest
 }

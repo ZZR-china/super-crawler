@@ -4,6 +4,7 @@ import qrRoutes from './qr.route';
 import captchaRoutes from './captcha.route';
 import meiziRoutes from './meizi.route';
 import picRoutes from './pic.route';
+import albumRoutes from './album.route';
 import spiderRoutes from './spider.route';
 import categoriesRoutes from './category.route';
 
@@ -17,7 +18,8 @@ router.use('/users', userRoutes);
 router.use('/qr', qrRoutes);
 router.use('/captcha', captchaRoutes);
 router.use('/meizi', meiziRoutes);
-router.use('/pic', picRoutes);
+router.use('/pics', picRoutes);
+router.use('/albums', albumRoutes);
 router.use('/categories', categoriesRoutes);
 router.use('/spiders', spiderRoutes);
 
