@@ -11,18 +11,19 @@ import PicCategory from '../models/pic_category.model';
 import AlbumCategory from '../models/album_category.model';
 
 function index(req, res, next) {
-    let query = req.query, 
+    let reqquery = req.query, 
         fliter, 
-        skip = Number(query.skip) || 0,
-        limit = Number(query.limit) || 50
-    if (query.name) {
-        const reg = new RegExp(query.name)
+        skip = Number(reqquery.skip) || 0,
+        limit = Number(reqquery.limit) || 50
+    let query = {}
+    if (reqquery.name) {
+        const reg = new RegExp(reqquery.name)
         query = { name: reg }
     }
     Category.list({ query, fliter, skip, limit})
         .then(result => {
             if (result.length === 0) {
-                let err = new APIError('not found', httpStatus.NOT_FOUND);
+                let err = new APIError('no category', httpStatus.NOT_FOUND);
                 return next(err);
             }
             return res.json(result)
