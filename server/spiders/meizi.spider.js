@@ -214,6 +214,9 @@ const start = async function(req, res, next) {
         start = start ? (start < 0 ? 0 : start) : 0;
         let end = (Number(query.end) - 1);
         end = (end === 0) ? 0 : (end ? (end < 0 ? 0 : end) : length);
+        if (start > end) {
+            return res.send("start is bigger than end, you are fucked")
+        }
         const zzr = query.zzr || null;
         const meizi_key = config.meiziKey
         if (zzr === meizi_key) {

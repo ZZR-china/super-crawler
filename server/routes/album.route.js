@@ -12,6 +12,9 @@ router.route('/')
 router.route('/:_id/pics')
 			.get(albumCtrl.getPics)
 
+router.route('/hotest')
+			.get(albumCtrl.getHotest)
+
 router.route('/random')
       .get(albumCtrl.random)
 

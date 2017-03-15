@@ -23,19 +23,22 @@ const pic_Schema = new Schema({
         minute: Number,
         full: String, //格式化时间 like:2017-03-02 21:12
     },
-    timestamp: { type: Number, default: new Date().getTime() },//图片创建时间
+    timestamp: { type: Number, default: new Date().getTime() }, //图片创建时间
     CreateAt: { type: Number, default: new Date().getTime() }
 });
 
 pic_Schema.statics = {
-    get(data) {
-        return this.findOne(data)
-            .then(result => {
-                if (result) {
-                    return result;
-                }
-                return Promise.reject('no such result');
-            })
+    /**
+     * List users in descending order of 'createdAt' timestamp.
+     * @param {number} skip - Number of users to be skipped.
+     * @param {number} limit - Limit number of users to be returned.
+     * @returns {Promise<User[]>}
+     */
+    list({ query = {}, fliter = null, skip = 0, limit = 50 } = {}) {
+        return this.find(query, fliter)
+            .sort({ timestamp: -1 })
+            .skip(skip)
+            .limit(limit)
     }
 }
 

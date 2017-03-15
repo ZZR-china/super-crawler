@@ -66,6 +66,13 @@ album_Schema.statics = {
             .sort({ timestamp: -1 })
             .skip(skip)
             .limit(limit)
+    },
+
+    hostList({ query = {}, fliter = null, skip = 0, limit = 50 } = {}) {
+        return this.find(query, fliter)
+            .sort({ view: -1 })
+            .skip(skip)
+            .limit(limit)
     }
 }
 

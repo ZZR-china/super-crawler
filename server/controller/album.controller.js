@@ -12,25 +12,52 @@ import GeneraAlbum from '../models/genera_album.model';
 import AlbumCategory from '../models/album_category.model';
 import PicCategory from '../models/pic_category.model';
 
-function index(req, res, next) {
-    let query = req.query,
-        fliter,
-        skip = Number(query.skip) || 0,
-        limit = Number(query.limit) || 50
-    query = query.name ? { name: query.name } : {}
-    Album.list({ query, fliter, skip, limit })
-        .then(result => {
-            if (result.length === 0) {
-                let err = new APIError('not found', httpStatus.NOT_FOUND);
-                return next(err);
-            }
-            return res.json(result)
-        })
-        .catch(err => {
-            console.error(err)
-            err = new APIError(err.message, httpStatus.NOT_FOUND, true);
+async function index(req, res, next) {
+    try {
+        let reqquery = req.query,
+            fliter,
+            skip = Number(reqquery.skip) || 0,
+            limit = Number(reqquery.limit) || 50,
+            category_id = reqquery.category_id,
+            category_name = reqquery.category_name,
+            title = reqquery.title
+
+        let query = {}
+        if (category_id && category_name) {
+            let err = new APIError('cant send id & name at onetime ', httpStatus.NOT_FOUND, true);
             return next(err);
-        })
+        }
+        if (category_id) {
+            let albumIds = await AlbumCategory.find({category_id: { $in: category_id}}, {album_id: 1})
+            albumIds = albumIds.map(function (item) {
+                return item.album_id
+            })
+            query._id = {$in: albumIds}
+        }
+        if (category_name) {
+            const cateReg = new RegExp(category_name)
+            const cateIDs = await Category.find({ name: cateReg }, { _id: 1})
+            let albumIds = await AlbumCategory.find({category_id: {$in: cateIDs }}, {album_id: 1})
+            albumIds = albumIds.map(function (item) {
+                return item.album_id
+            })
+            query._id = {$in: albumIds}
+        }
+        if (title) {
+            const reg = new RegExp(title)
+            query.title = reg
+        }
+        const album = await Album.list({ query, fliter, skip, limit })
+        if (album.length === 0) {
+            let err = new APIError('not found', httpStatus.NOT_FOUND);
+            return next(err);
+        }
+        return res.json(album)
+    }catch (err) {
+        console.error(err)
+        err = new APIError(err.message, httpStatus.NOT_FOUND, true);
+        return next(err);
+    }
 }
 
 function create(req, res, next) {
@@ -102,12 +129,55 @@ async function getPics(req, res, next) {
             return item.pic_id
         })
 
-        picsDoc = await Pic.find({ _id: { $in: picsDoc } }, { title: 1, url: 1, alt: 1, picview: 1, order: 1, formate_time: 1 })
+        picsDoc = await Pic.find({ _id: { $in: picsDoc } }, { title: 1, url: 1, alt: 1, picview: 1, order: 1, formate_time: 1, origin_url: 1 })
                            .sort({ order: 1 })
         return res.json(picsDoc)
     } catch (err) {
         console.error(err)
         err = new APIError(err.message, httpStatus.NOT_FOUND, true);
+        return next(err)
+    }
+}
+
+async function getHotest(req, res, next) {
+    try {
+        let reqquery = req.query,
+            fliter,
+            skip = Number(reqquery.skip) || 0,
+            limit = Number(reqquery.limit) || 50,
+            category_id = reqquery.category_id,
+            category_name = reqquery.category_name
+
+        let query = {}
+        if (category_id && category_name) {
+            let err = new APIError('cant send id & name at onetime ', httpStatus.NOT_FOUND, true);
+            return next(err);
+        }
+        if (category_id) {
+            let albumIds = await AlbumCategory.find({category_id: { $in: category_id}}, {album_id: 1})
+            albumIds = albumIds.map(function (item) {
+                return item.album_id
+            })
+            query._id = {$in: albumIds}
+        }
+        if (category_name) {
+            const cateReg = new RegExp(category_name)
+            const cateIDs = await Category.find({ name: cateReg }, { _id: 1})
+            let albumIds = await AlbumCategory.find({category_id: {$in: cateIDs }}, {album_id: 1})
+            albumIds = albumIds.map(function (item) {
+                return item.album_id
+            })
+            query._id = {$in: albumIds}
+        }
+        let album = await Album.hostList({ query, fliter, skip, limit })
+        if (album.length === 0) {
+            let err = new APIError('no album', httpStatus.NOT_FOUND)
+            return next(err)
+        }
+        return res.json(album)
+    }catch (err) {
+        console.error(err)
+        err = new APIError(err.message, httpStatus.NOT_FOUND, true)
         return next(err)
     }
 }
@@ -119,5 +189,6 @@ export default {
     update,
     destroy,
     random,
-    getPics
+    getPics,
+    getHotest
 }

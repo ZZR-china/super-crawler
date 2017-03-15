@@ -93,26 +93,24 @@ fail data:
 {"message":"Cannot read property 'meizi_ids' of null","request":"/meizi/random?type=asd"}
 
 ### categories api
-/categories?limit=50
+/categories?limit=50&name=&skip=
+支持模糊搜索
 
-```
+/categories/:_id
+单个分类信息查询
 
-success data:
+/categories/:_id/albums
 
-[{"_id":"58c6640b88c2d71748b023a6","name":"FeiLin(àÇàïàï)","__v":0,"CreateAt":1489396737709},
-{"_id":"58c6640b88c2d71748b023aa","name":"ÐÔ¸ÐÃÀÅ®","__v":0,"CreateAt":1489396737709},
-{"_id":"58c6640b88c2d71748b023ac","name":"ÊªÉíÓÕ»ó","__v":0,"CreateAt":1489396737709},
-{"_id":"58c6640c88c2d71748b023ae","name":"±¬Èé(ÐØÆ÷)","__v":0,"CreateAt":1489396737709}]
-
-```
-
-2. /pic/latest?show=
+2. /pic/latest?show=&limit=&skip=&title=
 
 show the latest pic
-
 
 ### albums api
 /albums/random
 
-/albums/58c6a871a244f0155811f589/pics
+/albums?category_id=&limit=&skip=&title=&category_name=
+title&category_name支持模糊搜索
 
+/albums/:_id/pics
+
+/albums/hotest?category_id=&limit=&skip=&category_name=
