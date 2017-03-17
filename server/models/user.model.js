@@ -23,7 +23,8 @@ const UserSchema = new Schema({
     hashed_password: { type: String, default: '' },
     salt: { type: String, default: '' },
     authToken: { type: String, default: '' },
-    github: {}
+    github: {},
+    stories : [{ type: Schema.Types.ObjectId, ref: 'Story' }]
 });
 
 const validatePresenceOf = value => value && value.length;

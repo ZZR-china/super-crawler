@@ -7,6 +7,8 @@ crawler based on express
 
 docker run -p 27017:27017 -v --name mymongo $PWD/db:/data/db -d mongo
 
+docker run -it --name myredis -p 6379:6379 -v G:\redisdb\data:/data  -d redis redis-server --appendonly yes
+
 pm2 start ./node_modules/.bin/gulp  --name 'pic' -- start
 
 

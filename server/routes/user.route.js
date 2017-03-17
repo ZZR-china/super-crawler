@@ -14,4 +14,7 @@ router.route('/:_id')
       .put(userCtrl.update)
       .delete(userCtrl.destroy);
 
+router.route('/test/test')
+			.get(userCtrl.test)
+
 export default router;
