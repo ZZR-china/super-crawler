@@ -12,6 +12,29 @@ import GeneraAlbum from '../../models/genera_album.model'
 import AlbumCategory from '../../models/album_category.model'
 import PicCategory from '../../models/pic_category.model'
 
+/**
+ * @api {get} /albums Request album info
+ * @apiName GetAlbum
+ * @apiGroup album
+ * @apiParam {Number} limit the number of return data length.
+ * @apiParam {String} category the album categories.
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   [{
+ *   "_id":"58cd525dd75f8e08f46e1876",
+ *   "title":"身娇腰柔易推倒,越往后看越精彩 清纯萝莉童颜巨乳甜美可人",
+ *   "__v":0,
+ *   "hotest_pic_url":"http://i.meizitu.net/2017/03/17a16.jpg",
+ *   "hotest_pic_id":"58cd5262d75f8e08f46e1916",
+ *   "max_picview":704159,
+ *   "view":8000248,
+ *   "CreateAt":1489850932705,
+ *   "timestamp":1489757100000,
+ *   "formate_time":{"year":2017,"month":3,"day":2,"full":"2017-03-17 21:25"},
+ *   "homesite":{"url":"http://m.mzitu.com","name":"妹子图"}
+ *   }]
+ */
 async function index(req, res, next) {
     try {
         let reqquery = req.query,
@@ -76,6 +99,28 @@ function destroy(req, res, next) {
 
 }
 
+/**
+ * @api {get} /albums/random Request random album
+ * @apiName GetAlbum
+ * @apiGroup album
+ *
+ * @apiSuccessExample {json} Success-Response:
+ *   HTTP/1.1 200 OK
+ *   {
+ *   "_id":"58c6a540a244f0155811e1ae",
+ *   "title":"爆乳翘臀的惹火御姐 性感美女尤娜娜胸前纹身惊艳诱人",
+ *   "__v":0,
+ *   "hotest_pic_url":"http://i.meizitu.net/2017/02/18a29.jpg",
+ *   "hotest_pic_id":"58c6a564a244f0155811ef41",
+ *   "max_picview":1138664,
+ *   "view":73881096,
+ *   "CreateAt":1489413412181,
+ *   "timestamp":1487423400000,
+ *   "formate_time":{"year":2017,"month":2,"day":1,"full":"2017-02-18 21:10"},
+ *   "homesite":{"url":"http://m.mzitu.com","name":"妹子图"}
+ *   }
+ *   
+ */
 async function random(req, res, next) {
     try {
         let category = req.query.category

@@ -5,7 +5,6 @@ bin-release/
 [Oo]bj/ # FlashDevelop obj
 [Bb]in/ # FlashDevelop bin
 
-
 # Executables
 *.swf
 *.air
