@@ -66,5 +66,6 @@ function start(req, res, next) {
 }
 
 export default {
-    start
+    start,
+    name: 'baimao'
 }

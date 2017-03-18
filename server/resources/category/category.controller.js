@@ -1,18 +1,18 @@
-import httpStatus from 'http-status';
+import httpStatus from 'http-status'
 
-import APIError from '../helpers/apierror.helper';
-import _random from '../helpers/random.helper';
+import APIError from '../../helpers/apierror.helper'
+import _random from '../../helpers/random.helper'
 
-import Pic from '../models/pic.model';
-import Album from '../models/album.model';
-import Category from '../models/category.model';
-import Genera from '../models/genera.model';
-import PicCategory from '../models/pic_category.model';
-import AlbumCategory from '../models/album_category.model';
+import Pic from '../../models/pic.model'
+import Album from '../../models/album.model'
+import Category from '../../models/category.model'
+import Genera from '../../models/genera.model'
+import PicCategory from '../../models/pic_category.model'
+import AlbumCategory from '../../models/album_category.model'
 
 function index(req, res, next) {
-    let reqquery = req.query, 
-        fliter, 
+    let reqquery = req.query,
+        fliter,
         skip = Number(reqquery.skip) || 0,
         limit = Number(reqquery.limit) || 50
     let query = {}
@@ -20,7 +20,7 @@ function index(req, res, next) {
         const reg = new RegExp(reqquery.name)
         query = { name: reg }
     }
-    Category.list({ query, fliter, skip, limit})
+    Category.list({ query, fliter, skip, limit })
         .then(result => {
             if (result.length === 0) {
                 let err = new APIError('no category', httpStatus.NOT_FOUND);
@@ -36,7 +36,7 @@ function index(req, res, next) {
 }
 
 function create(req, res, next) {
-   
+
 }
 
 function show(req, res, next) {
@@ -65,7 +65,7 @@ function destroy(req, res, next) {
 
 }
 
-async function getAlbums (req, res, next) {
+async function getAlbums(req, res, next) {
     try {
         let category_id = req.params._id,
             reqquery = req.query,
@@ -74,18 +74,18 @@ async function getAlbums (req, res, next) {
             limit = Number(reqquery.limit) || 50
 
         let query = {}
-        const cateDoc = await AlbumCategory.find({ category_id: category_id}, {album_id: 1})
-        const albumIds = cateDoc.map(function (item) {
+        const cateDoc = await AlbumCategory.find({ category_id: category_id }, { album_id: 1 })
+        const albumIds = cateDoc.map(function(item) {
             return item.album_id
         })
-        query._id = {$in: albumIds} 
+        query._id = { $in: albumIds }
         const album = await Album.list({ query, fliter, skip, limit })
         if (album.length === 0) {
             let err = new APIError('not found', httpStatus.NOT_FOUND);
             return next(err);
         }
         return res.json(album)
-    }catch (err) {
+    } catch (err) {
         console.error(err)
         err = new APIError(err.message, httpStatus.NOT_FOUND, true);
         return next(err);
@@ -102,15 +102,15 @@ async function random(req, res, next) {
             type = genera[num]
         }
         type = type + '妹子'
-        const generaDoc = await Genera.findOne({name: type})
+        const generaDoc = await Genera.findOne({ name: type })
         const meiziIds = generaDoc.meizi_ids;
         const meiziId = _random.getRandomFromArr(meiziIds, 1)[0]
-        const meiziDoc = await Meizi.findOne({_id: meiziId})
+        const meiziDoc = await Meizi.findOne({ _id: meiziId })
         const picIds = meiziDoc.pic_ids;
         const picId = _random.getRandomFromArr(picIds, 1)[0]
-        const picDoc = await Pic.findOne({_id: picId})
+        const picDoc = await Pic.findOne({ _id: picId })
         return res.json(picDoc)
-    }catch(err) {
+    } catch (err) {
         console.error(err)
         err = new APIError(err.message, httpStatus.NOT_FOUND, true);
         return next(err)

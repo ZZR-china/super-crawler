@@ -1,7 +1,5 @@
 import express from 'express';
-import Ctrl from '../controller/anonym.controller';
-import expressJwt from 'express-jwt';
-import config from '../../config/env';
+import Ctrl from './anonym.controller'
 
 const router = express.Router();
 
@@ -12,4 +10,7 @@ router.route('/')
 router.route('/token')
       .get(Ctrl.getToken)
 
-export default router;
+export default {
+	router,
+	baseUrl: '/anonyms'
+}

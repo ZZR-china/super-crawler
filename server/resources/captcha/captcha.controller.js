@@ -1,8 +1,6 @@
 import svgCaptcha from 'svg-captcha';
-/**
- * creat image with svg-captcha, that's awesome
- */
-function captchaImage (req, res, next) {
+
+function captchaImage(req, res, next) {
     try {
         var captcha = svgCaptcha.create({
             size: 4, // 验证码长度
@@ -13,13 +11,13 @@ function captchaImage (req, res, next) {
         });
         const text = captcha.text;
         res.set({
-        	'Content-Type':'image/svg+xml',
-        	'image-text':text
+            'Content-Type': 'image/svg+xml',
+            'image-text': text
         })
         res.status(200).send(captcha.data);
     } catch (e) {
         next(e)
-    }   
+    }
 }
 
-export default {captchaImage}
+export default { captchaImage }

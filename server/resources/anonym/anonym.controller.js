@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
 
-import APIError from '../helpers/apierror.helper';
+import APIError from '../../helpers/apierror.helper';
 
 function index(req, res, next) {
 
@@ -27,7 +27,7 @@ async function getToken (type) {
 
     }catch (err) {
         console.error(err)
-        err = new APIError(err.message, httpStatus.NOT_FOUND, true);
+        err = new APIError(err.message, httpStatus.NOT_FOUND, true)
         return next(err)
     }
 }
