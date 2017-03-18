@@ -28,14 +28,7 @@ gulp.task('copy', () =>
 gulp.task('babel', () =>
   gulp.src([...paths.js, '!gulpfile.babel.js'], { base: '.' })
     .pipe(plugins.newer('dist'))
-    .pipe(plugins.sourcemaps.init())
     .pipe(plugins.babel())
-    .pipe(plugins.sourcemaps.write('.', {
-      includeContent: false,
-      sourceRoot(file) {
-        return path.relative(file.path, __dirname);
-      }
-    }))
     .pipe(gulp.dest('dist'))
 );
 
