@@ -1,5 +1,5 @@
 import express from 'express';
-import captchaCtrl from '../controller/captcha.controller';
+import captchaCtrl from './captcha.controller';
 
 const router = express.Router();
 /**
@@ -8,4 +8,7 @@ const router = express.Router();
 router.route('/image')
     .get(captchaCtrl.captchaImage);
 
-export default router;
+export default {
+	router,
+	baseUrl: '/captchas'
+}

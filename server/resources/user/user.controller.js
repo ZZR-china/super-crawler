@@ -1,10 +1,9 @@
 import httpStatus from 'http-status';
-import co from 'co';
 
-import APIError from '../helpers/apierror.helper';
-import User from '../models/user.model'
-import Admin from '../models/admin.model'
-import Story from '../models/story.model'
+import APIError from '../../helpers/apierror.helper';
+import User from '../../models/user.model'
+import Admin from '../../models/admin.model'
+import Story from '../../models/story.model'
 
 function index(req, res, next) {
     const query = req.query;

@@ -1,18 +1,17 @@
 import httpStatus from 'http-status';
 import axios from 'axios';
 import request from 'request';
-import fs from 'fs';
 
-import APIError from '../helpers/apierror.helper';
-import _random from '../helpers/random.helper';
+import APIError from '../../helpers/apierror.helper';
+import _random from '../../helpers/random.helper';
 
-import Pic from '../models/pic.model';
-import Album from '../models/album.model';
-import AlbumPic from '../models/album_pic.model';
-import Category from '../models/category.model';
-import Genera from '../models/genera.model';
-import GeneraAlbum from '../models/genera_album.model';
-import PicCategory from '../models/pic_category.model';
+import Pic from '../../models/pic.model';
+import Album from '../../models/album.model';
+import AlbumPic from '../../models/album_pic.model';
+import Category from '../../models/category.model';
+import Genera from '../../models/genera.model';
+import GeneraAlbum from '../../models/genera_album.model';
+import PicCategory from '../../models/pic_category.model';
 
 function index(req, res, next) {
     let reqquery = req.query,
@@ -87,7 +86,11 @@ async function randomPic (type) {
         }else{
             type = type + '妹子'
         }
-        const generaDoc = await Genera.findOne({name: type})
+        const regType = new RegExp(type, ['g'])
+        const generaDoc = await Genera.findOne({name: regType})
+        if (!generaDoc) {
+            return null
+        }
         const genera_id = generaDoc._id;
         const generaAlbumDoc = await GeneraAlbum.find({genera_id: genera_id})
         const albumIds = await generaAlbumDoc.map(function(item) {

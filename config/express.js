@@ -13,7 +13,7 @@ import expressJwt from 'express-jwt';
 import expressWinston from 'express-winston';
 import expressValidation from 'express-validation';
 import winstonInstance from './winston';
-import routes from '../server/routes/index.route';
+import routes from '../server/resources';
 import config from './env';
 import APIError from '../server/helpers/apierror.helper';
 

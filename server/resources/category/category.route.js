@@ -1,7 +1,5 @@
 import express from 'express';
-import categoryCtrl from '../controller/category.controller';
-import expressJwt from 'express-jwt';
-import config from '../../config/env';
+import categoryCtrl from './category.controller';
 
 const router = express.Router()
 
@@ -15,4 +13,7 @@ router.route('/:_id')
 router.route('/:_id/albums')
 			.get(categoryCtrl.getAlbums)
 
-export default router;
+export default {
+	router,
+	baseUrl: '/categories'
+}

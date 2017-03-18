@@ -1,16 +1,16 @@
-import httpStatus from 'http-status';
+import httpStatus from 'http-status'
 
-import APIError from '../helpers/apierror.helper';
-import _random from '../helpers/random.helper';
+import APIError from '../../helpers/apierror.helper'
+import _random from '../../helpers/random.helper'
 
-import Pic from '../models/pic.model';
-import Album from '../models/album.model';
-import AlbumPic from '../models/album_pic.model';
-import Category from '../models/category.model';
-import Genera from '../models/genera.model';
-import GeneraAlbum from '../models/genera_album.model';
-import AlbumCategory from '../models/album_category.model';
-import PicCategory from '../models/pic_category.model';
+import Pic from '../../models/pic.model'
+import Album from '../../models/album.model'
+import AlbumPic from '../../models/album_pic.model'
+import Category from '../../models/category.model'
+import Genera from '../../models/genera.model'
+import GeneraAlbum from '../../models/genera_album.model'
+import AlbumCategory from '../../models/album_category.model'
+import PicCategory from '../../models/pic_category.model'
 
 async function index(req, res, next) {
     try {

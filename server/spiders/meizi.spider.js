@@ -235,5 +235,6 @@ const start = async function(req, res, next) {
 }
 
 export default {
-    start
+    start,
+    name: 'meizi'
 }

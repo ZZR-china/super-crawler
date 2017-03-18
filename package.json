@@ -14,7 +14,8 @@
         "pro": "cross-env NODE_ENV=production gulp serve",
         "dev": "cross-env NODE_ENV=development gulp serve",
         "test": "cross-env NODE_ENV=test gulp serve",
-        "build": "gulp"
+        "build": "gulp",
+        "docs": "apidoc -i server/resources -o docs/"
     },
     "keywords": [
         "node",
@@ -38,6 +39,7 @@
         "express-jwt": "^5.1.0",
         "express-validation": "^1.0.1",
         "express-winston": "^2.2.0",
+        "glob": "^7.1.1",
         "helmet": "^3.4.0",
         "http-status": "^1.0.1",
         "jsonwebtoken": "^7.2.1",
@@ -57,6 +59,7 @@
         "winston": "^2.3.1"
     },
     "devDependencies": {
+        "apidoc": "^0.17.5",
         "babel-cli": "^6.22.2",
         "babel-core": "^6.22.1",
         "babel-plugin-add-module-exports": "^0.2.1",

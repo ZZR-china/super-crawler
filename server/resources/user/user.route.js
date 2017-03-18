@@ -1,7 +1,5 @@
 import express from 'express';
-import userCtrl from '../controller/user.controller';
-import expressJwt from 'express-jwt';
-import config from '../../config/env';
+import userCtrl from './user.controller';
 
 const router = express.Router();
 
@@ -17,4 +15,7 @@ router.route('/:_id')
 router.route('/test/test')
 			.get(userCtrl.test)
 
-export default router;
+export default {
+	router,
+	baseUrl: '/users'
+}
