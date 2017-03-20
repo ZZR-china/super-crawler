@@ -13,5 +13,7 @@ function start(req, res, next){
 
 export default {
 		start,
-		name: 'cnblog'
+		name: 'cnblog',
+		url: '/cnblog',
+		get: start
 }

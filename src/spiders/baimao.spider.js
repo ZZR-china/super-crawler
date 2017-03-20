@@ -67,5 +67,7 @@ function start(req, res, next) {
 
 export default {
     start,
-    name: 'baimao'
+    name: 'baimao',
+    url: '/baimao',
+    get: start
 }

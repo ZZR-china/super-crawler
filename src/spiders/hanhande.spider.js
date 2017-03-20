@@ -170,5 +170,7 @@ async function start() {
 
 export default {
 	start,
-    name: 'hanhande'
+    name: 'hanhande',
+    url: '/hanhande',
+    get: start
 }

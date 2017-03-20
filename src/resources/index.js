@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     res.send("hope is hope, nerver lose his way")
 })
 
-const path = config.rootPath + '/server/resources/**/**.route.js'
+const path = config.rootPath + '/src/resources/**/**.route.js'
 let routes = glob.sync(path)
 
 routes.forEach(function(route) {

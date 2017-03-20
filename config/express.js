@@ -13,9 +13,9 @@ import expressJwt from 'express-jwt';
 import expressWinston from 'express-winston';
 import expressValidation from 'express-validation';
 import winstonInstance from './winston';
-import routes from '../server/resources';
+import routes from '../src/resources';
 import config from './env';
-import APIError from '../server/helpers/apierror.helper';
+import APIError from '../src/helpers/apierror.helper';
 
 
 const app = express();
@@ -68,19 +68,6 @@ app.disable('x-powered-by');
 //   {url: /\/v1\/sms/i, methods: ['GET']}
 // ]}));
 
-// enable detailed API logging in dev env
-// if (config.env === 'development') {
-//   expressWinston.requestWhitelist.push('body');
-//   expressWinston.responseWhitelist.push('body');
-//   app.use(expressWinston.logger({
-//     winstonInstance,
-//     meta: true, // optional: log meta data about request (defaults to true)
-//     msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-//     colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
-//   }));
-// }
-
-// mount all routes on / path
 app.use('/', routes);
 
 // if error is not an instanceOf APIError, convert it.

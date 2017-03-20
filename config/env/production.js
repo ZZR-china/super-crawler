@@ -3,6 +3,7 @@ export default {
   jwtSecret: process.env.jwtSecret,
   db: process.env.mongodb,
   meiziKey: process.env.MEIZI_KEY,
+  mm131Key: process.env.MM131_KEY,
   port: process.env.APP_PORT || 3000,
   redis: {
     host: process.env.REDIS_HOST,
