@@ -1,5 +1,5 @@
 /*
- * Module description: genera model 与 meizi是一对多关系
+ * Module description: genera model 与 album是一对多关系
  */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;

@@ -13,6 +13,7 @@ const album_Schema = new Schema({
         name: String, //主站网址名字 妹子图等
     },
     description: String, //描述
+    cover: String, //封面图片
     hotest_pic_id: Schema.Types.ObjectId, //浏览量最高的图片id
     hotest_pic_url: String, //浏览量最高的图片地址
     view: Number, //浏览量
