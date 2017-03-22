@@ -228,6 +228,6 @@ async function start(req, res, next) {
 export default {
     start,
     name: 'mm131',
-    url: '/mm131',
+    url: '/mm131s',
     get: start
 }
