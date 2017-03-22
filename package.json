@@ -25,6 +25,7 @@
         "node": ">=6.x"
     },
     "dependencies": {
+        "apidoc": "^0.17.5",
         "async": "^2.1.5",
         "axios": "^0.15.3",
         "bluebird": "^3.4.7",
