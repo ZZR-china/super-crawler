@@ -42,4 +42,4 @@ pic_Schema.statics = {
     }
 }
 
-export default mongoose.model('pic', pic_Schema, 'pic');
+export default mongoose.model('Pic', pic_Schema, 'pic');

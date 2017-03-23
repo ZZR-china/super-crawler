@@ -17,7 +17,6 @@ import routes from '../src/resources';
 import config from './env';
 import APIError from '../src/helpers/apierror.helper';
 
-
 const app = express();
 if (config.env === 'development') {
   app.use(logger('dev'));
@@ -47,26 +46,26 @@ app.use(cors(corsOptions));
 app.disable('x-powered-by');
 
 //express jwt config
-
-// app.use(expressJwt({
-//   secret: config.jwtSecret,
-//   getToken (req) {
-//     if (req.headers.authorization) {
-//         return req.headers.authorization;
-//     } else if (req.query && req.query.token) {
-//       return req.query.token;
-//     }
-//     return null;
-//   }
-// }).unless({path: [
-//   '/captcha/image',
-//   {url: '/', methods: ['GET']},
-//   {url: /^(\/qr)+(\/url)+(\i)*/, methods: ['GET']},
-//   {url: /^(\/qr)+(\/url)*(\?)+(\w)*(\=)*(\w)*/, methods: ['GET']},
-//   {url: '/auth/random', methods: ['GET']},
-//   {url: '/auth', methods: ['GET', 'POST']},
-//   {url: /\/v1\/sms/i, methods: ['GET']}
-// ]}));
+app.use(expressJwt({
+  secret: config.jwtSecret,
+  getToken (req) {
+    if (req.headers.authorization) {
+        return req.headers.authorization;
+    } else if (req.query && req.query.token) {
+      return req.query.token;
+    }
+    return null;
+  }
+}).unless({path: [
+  {url: '/', methods: ['GET']},
+  {url: '/users', methods: ['POST']},
+  {url: '/auth', methods: ['GET', 'POST']},
+  {url: '/pics/random', methods: ['GET']},
+  {url: '/albums/random', methods: ['GET']},
+  {url: /\/spiders\/\w+/, methods: ['GET']},
+  {url: '/captcha/image', methods: ['GET']},
+  {url: '/meizi/random', methods: ['GET']},
+]}))
 
 app.use('/', routes);
 

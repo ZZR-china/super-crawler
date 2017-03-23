@@ -92,7 +92,6 @@ function decipherpromise(str, key) {
     })
 }
 
-
 export default {
     cipher,
     key_cipher,

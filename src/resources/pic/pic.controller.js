@@ -1,17 +1,19 @@
-import httpStatus from 'http-status';
-import axios from 'axios';
-import request from 'request';
+import httpStatus from 'http-status'
+import axios from 'axios'
+import request from 'request'
 
-import APIError from '../../helpers/apierror.helper';
-import _random from '../../helpers/random.helper';
+import APIError from '../../helpers/apierror.helper'
+import _random from '../../helpers/random.helper'
+import _mongo from '../../helpers/mongo.helper'
 
-import Pic from '../../models/pic.model';
-import Album from '../../models/album.model';
-import AlbumPic from '../../models/album_pic.model';
-import Category from '../../models/category.model';
-import Genera from '../../models/genera.model';
-import GeneraAlbum from '../../models/genera_album.model';
-import PicCategory from '../../models/pic_category.model';
+import Pic from '../../models/pic.model'
+import Album from '../../models/album.model'
+import PicLove from '../../models/pic_love.model'
+import AlbumPic from '../../models/album_pic.model'
+import Category from '../../models/category.model'
+import Genera from '../../models/genera.model'
+import GeneraAlbum from '../../models/genera_album.model'
+import PicCategory from '../../models/pic_category.model'
 
 function index(req, res, next) {
     let reqquery = req.query,
@@ -127,6 +129,21 @@ async function latest (req, res, next) {
     }
 }
 
+async function setPicLove (req, res, next) {
+    try {
+        const { user_id } = req.user
+        const { love } = req.body
+        const pic_id = req.params._id
+        const doc = { user_id, pic_id, love }
+        const picLoveDoc = await _mongo.uniqSave(doc, doc, PicLove)
+        return res.json(picLoveDoc)
+    } catch (err) {
+        console.error(err)
+        err = new APIError(err.message, httpStatus.NOT_FOUND, true);
+        return next(err);
+    }
+}
+
 export default {
     index,
     create,
@@ -134,5 +151,6 @@ export default {
     update,
     destroy,
     random,
-    latest
+    latest,
+    setPicLove
 }

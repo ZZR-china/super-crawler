@@ -1,8 +1,9 @@
 /*
  * Module description: album pictrue
  */
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose'
+
+const Schema = mongoose.Schema
 const album_Schema = new Schema({
     title: {
         type: String,
@@ -77,4 +78,4 @@ album_Schema.statics = {
     }
 }
 
-export default mongoose.model('album', album_Schema, 'album');
+export default mongoose.model('Album', album_Schema, 'album');
