@@ -9,6 +9,9 @@ router.route('/')
 router.route('/check')
     .post(authCtrl.check)
 
+router.route('/anonmy')
+    .post(authCtrl.getAnonmyAuth)
+
 export default {
     router,
     baseUrl: '/auth'

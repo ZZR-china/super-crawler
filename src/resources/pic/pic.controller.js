@@ -144,6 +144,11 @@ async function setPicLove (req, res, next) {
     }
 }
 
+function getImgByurl (req, res, next) {
+    const url = req.query.url
+    return request(url).pipe(res)
+}
+
 export default {
     index,
     create,
@@ -152,5 +157,6 @@ export default {
     destroy,
     random,
     latest,
-    setPicLove
+    setPicLove,
+    getImgByurl
 }

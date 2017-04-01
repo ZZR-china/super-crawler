@@ -38,7 +38,7 @@ async function create(req, res, next) {
     }
 }
 
-function check(req, res, next) {
+function check (req, res, next) {
     const params = req.params;
     User.findOneAndRemove(params)
         .then(result => {
@@ -51,7 +51,27 @@ function check(req, res, next) {
         })
 }
 
+async function getAnonmyAuth (req, res, next) {
+    try {
+        const userDoc = new User({})
+        const user = await userDoc.save()
+        const user_id = user._id
+        const jwt_token = {
+            user_id: user._id
+        }
+        const token = JWT.sign(jwt_token, jwtsecret, {
+            expiresIn: '2000h'
+        })
+        return res.json({token})
+    } catch (err) {
+        console.error(err)
+        err = new APIError(err.message, httpStatus.NOT_FOUND, true);
+        return next(err);
+    }
+}
+
 export default {
     create,
-    check
+    check,
+    getAnonmyAuth
 }

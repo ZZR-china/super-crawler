@@ -59,6 +59,9 @@ app.use(expressJwt({
 }).unless({path: [
   {url: '/', methods: ['GET']},
   {url: '/users', methods: ['POST']},
+  {url: '/albums', methods: ['GET']},
+  {url: /\/albums\/\w+\/pics/, methods: ['GET']},
+  {url: '/pics/url', methods: ['GET']},
   {url: '/auth', methods: ['GET', 'POST']},
   {url: '/pics/random', methods: ['GET']},
   {url: '/albums/random', methods: ['GET']},

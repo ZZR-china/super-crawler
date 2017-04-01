@@ -10,6 +10,9 @@ router.route('/')
 router.route('/random')
       .get(Ctrl.random)
 
+router.route('/url')
+      .get(Ctrl.getImgByurl)
+
 router.route('/latest')
       .get(Ctrl.latest)
 
