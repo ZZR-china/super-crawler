@@ -10,6 +10,10 @@ const defaults = {
   	url: "http://m.mzitu.com",
   	name: "妹子图"
   },
+  meiziSpiderUrl: {
+    all: 'http://m.mzitu.com/all',
+    home: 'http://m.mzitu.com/'
+  },
   mm131: {
   	url: "http://www.mm131.com/",
   	name: "MM131美女图片网"

@@ -28,8 +28,8 @@ const homesite = config.meizi
  */
 
 function manageBricks(brick) {
-    let href = brick.find('a').attr('href');
-    return saveAlbum(href);
+    let href = brick.find('a').attr('href')
+    return saveAlbum(href)
 }
 
 function managePreviw(str) {
@@ -179,7 +179,6 @@ async function savePic({ href, count, album_id, categories, view, max_picview, h
             await uniquSave(pic_category_query, pic_category_query, PicCategory);
         }
 
-        
         view += picview
         if (max_picview < picview ) {
             max_picview = picview
@@ -189,36 +188,66 @@ async function savePic({ href, count, album_id, categories, view, max_picview, h
         count++
         console.log("=============== start ================")
         console.log("pic title", title);
-        console.log("pic formate_time", formate_time.full);
+        console.log("pic formate_time", formate_time.full)
         console.log("origin_url", origin_url)
-        console.log("pic max_picview", max_picview);
+        console.log("pic max_picview", max_picview)
         console.log("=============== end ================")
         return { href, count, album_id, categories, view, max_picview, hotest_pic_id, hotest_pic_url }
     } catch (err) {
-        console.error(err);
+        console.error(err)
     }
+}
+
+async function singlePage ({n = 0}) {
+    const url = config.meiziSpiderUrl.home
+    console.log('url', url)
+    let response = await axios.get(url)
+    let data = response.data
+    let $ = cheerio.load(data)
+    const placeholders = $('#content .placeholder')
+    const length = placeholders.length
+    console.log('url', placeholders.eq(n).find('h2 a').attr('href'))
+    const href = placeholders.eq(n).find('h2 a').attr('href')
+    return saveAlbum(href)
 }
 
 // 主start程序
 const start = async function(req, res, next) {
     try {
-        let meiziall_href = "http://m.mzitu.com/all";
-        let response = await axios.get(meiziall_href);
-        let data = response.data;
-        let $ = cheerio.load(data);
-        const archive_bricks = $('#post-archives .archive-brick');
-        const length = archive_bricks.length;
-        const query = req.query;
-        let start = (Number(query.start) - 1);
-        start = start ? (start < 0 ? 0 : start) : 0;
-        let end = (Number(query.end) - 1);
-        end = (end === 0) ? 0 : (end ? (end < 0 ? 0 : end) : length);
-        if (start > end) {
+        const query = req.query
+        let start = (Number(query.start) - 1)
+        start = start ? (start < 0 ? 0 : start) : 0
+        let end = (Number(query.end) - 1)
+        end = (end === 0) ? 0 : (end ? (end < 0 ? 0 : end) : 'none')
+        if (start > end && end === 'none') {
             return res.send("start is bigger than end, you are fucked")
         }
-        const zzr = query.zzr || null;
+        const zzr = query.zzr || null
         const meizi_key = config.meiziKey
+        const single = query.single || null
+        if (single === '1') {
+            if (end === 'none') {
+                end = 8
+            }
+            while (start <= end) {
+                singlePage({n: start})
+                start++
+            }
+            setInterval(function () {
+                singlePage()
+            }, 259200)
+            return res.send('start single')
+        }
         if (zzr === meizi_key) {
+            let meiziall_href = "http://m.mzitu.com/all"
+            let response = await axios.get(meiziall_href)
+            let data = response.data
+            let $ = cheerio.load(data)
+            const archive_bricks = $('#post-archives .archive-brick')
+            const length = archive_bricks.length
+            if (end === 'none') {
+                end = length
+            }
             while (start <= end) {
                 manageBricks(archive_bricks.eq(start))
                 start++
