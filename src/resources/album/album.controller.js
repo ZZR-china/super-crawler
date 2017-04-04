@@ -58,6 +58,8 @@ async function index(req, res, next) {
             query._id = {$in: albumIds}
         }
         if (category_name) {
+            category_name = category_name.replace('(', '\\(')
+                         .replace(')', '\\)')
             const cateReg = new RegExp(category_name)
             const cateIDs = await Category.find({ name: cateReg }, { _id: 1})
             let albumIds = await AlbumCategory.find({category_id: {$in: cateIDs }}, {album_id: 1})
