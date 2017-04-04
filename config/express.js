@@ -63,6 +63,7 @@ app.use(expressJwt({
   {url: /\/albums\/\w+\/pics/, methods: ['GET']},
   {url: '/pics/url', methods: ['GET']},
   {url: '/auth', methods: ['GET', 'POST']},
+  {url: '/categories', methods: ['GET']},
   {url: '/pics/random', methods: ['GET']},
   {url: '/albums/random', methods: ['GET']},
   {url: /\/spiders\/\w+/, methods: ['GET']},
